@@ -1,0 +1,123 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamy}
+
+\usetheme{Warsaw} 
+%\usecolortheme{lily} 
+\usefonttheme[onlymath]{serif}
+
+\usepackage{amsmath,amsthm,amssymb,mathtools} 
+\usepackage[shortlabels]{enumitem}
+\usepackage{graphicx}
+\usepackage[abbreviationsonly]{jjz} 
+
+\graphicspath{{diagrams/}} 
+
+%%%% COLORS/COLOR STYLE
+% unused %
+\definecolor{amethyst}{rgb}{0.6, 0.4, 0.8}
+\definecolor{oxfordblue}{HTML}{001b2e}
+\definecolor{darkeramethyst}{HTML}{7038A8}
+\definecolor{laurelgreen}{HTML}{9FB798}
+\definecolor{copper}{HTML}{B87D4B}
+%%%%%%%%%%
+
+% main % 
+\definecolor{darkestblue}{HTML}{1d3557}
+\definecolor{middleblue}{HTML}{457b9d}
+\definecolor{lightestblue}{HTML}{a8dadc}
+
+%\setbeamercolor{structure}{fg=laurelgreen!50!oxfordblue}
+%\setbeamercolor{footerauthorcustom}{fg=white,bg=oxfordblue}
+%\setbeamercolor{footerpagecustom}{fg=white,bg=laurelgreen}
+\setbeamercolor{structure}{fg=middleblue}
+\setbeamercolor{footerauthorcustom}{fg=white,bg=darkestblue}
+\setbeamercolor{footerpagecustom}{fg=white,bg=middleblue!75!lightestblue}
+%%%%%%%%
+
+% block %
+\definecolor{platinum}{HTML}{e2e2e2}
+\definecolor{blocktitlebg}{HTML}{a7a7a7}
+\definecolor{blocktitlefg}{HTML}{1d3557}
+
+\setbeamercolor{block title}{use={normal text,block text},fg=blocktitlefg!80!blue, bg=blocktitlebg}
+\setbeamercolor{block title example}{use={normal text,example text},fg=example text.fg!75!normal text.fg, bg=normal text.bg!70!black}
+\setbeamercolor{block title alerted}{use={normal text,alerted text},fg=alerted text.fg!75!normal text.fg, bg=normal text.bg!70!black}
+
+\setbeamercolor{block body}{fg=normal text.fg, bg=platinum}
+\setbeamercolor{block body example}{fg=normal text.fg, bg=normal text.bg!92!black}
+\setbeamercolor{block body alerted}{fg=normal text.fg, bg=normal text.bg!92!black}
+%%%%%%%%%
+
+%%%% (SUB)SECTION HEADINGS 
+\AtBeginSection[]{
+	\begingroup
+	\setbeamertemplate{footline}{}
+	\begin{frame}[noframenumbering]
+		\vspace{35mm}
+		\vfill
+		\raggedright
+		\usebeamerfont{title}{\color{middleblue!75!lightestblue} Section \thesection} \\ \insertsectionhead
+		\vfill
+	\end{frame}
+	\endgroup
+}
+
+\AtBeginSubsection[]{
+	\begin{frame}[noframenumbering]
+		\vspace{5mm}
+		\vfill
+		\centering
+		\usebeamerfont{title}Section \thesection.\thesubsection: \insertsubsectionhead
+		\vfill
+	\end{frame}
+}
+%%%%%%%%
+
+%%%% BEAMER STRUCTURE 
+\setbeamertemplate{headline}{\vspace{3mm}}
+
+\setbeamertemplate{footline}
+{
+	\leavevmode%
+	\hbox{%
+	\begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{footerauthorcustom}%
+		\usebeamerfont{author in head/foot}\insertauthor
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{footerpagecustom}%
+		\usebeamerfont{title in head/foot}\inserttitle
+	\end{beamercolorbox}}%
+	\begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,center]{footerauthorcustom}%
+		\usebeamerfont{author in head/foot}{Page \insertframenumber{} of \inserttotalframenumber}%
+	\end{beamercolorbox}% 
+	\vskip0pt%
+}
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\beamertemplatenavigationsymbolsempty
+%%%%%%%%%%%%%%%%
+
+%%%%% EXTRAS
+\definecolor{vocab}{HTML}{e63946}
+\definecolor{highlight}{HTML}{9FB798}
+\newcommand\vocab[1]{{\color{vocab} #1}} 
+\newcommand\highlight[1]{{\color{highlight} #1}}
+\newcommand\vv{\vspace{2mm}}
+%%%%%%%%%%%%
+
+%%%% MATH COMMANDS
+\newcommand\RR{\mathbb R} 
+\newcommand\ZZ{\mathbb Z} 
+\newcommand\QQ{\mathbb Q} 
+\newcommand\CC{\mathbb C} 
+\newcommand\NN{\mathbb N} 
+
+\newcommand\ga{\gamma}
+\newcommand\Ga{\Gamma}
+
+\DeclareMathOperator\im{im} 
+\DeclareMathOperator\id{id} 
+%%%%%%%%%%%%%
+
+\endinput 
+
