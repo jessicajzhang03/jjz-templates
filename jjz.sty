@@ -10,6 +10,8 @@
 \newif\ifjjz@solutions\jjz@solutionsfalse
 \newif\ifjjz@headfoot\jjz@headfootfalse 
 \newif\ifjjz@titlepage\jjz@titlepagefalse 
+\newif\ifjjz@package\jjz@packagetrue
+\newif\ifjjz@abbreviations\jjz@abbreviationstrue
 
 \newif\ifjjz@ORthmshare\jjz@ORthmsharefalse
 \newif\ifjjz@ORthmsec\jjz@ORthmsecfalse 
@@ -39,11 +41,14 @@
 \DeclareOption{titlepage}{\jjz@titlepagefalse\jjz@ORtitlepagetrue} 
 \DeclareOption{margin}{\RequirePackage[margin=1in]{geometry}} 
 \DeclareOption{nomargin}{}
+\DeclareOption{abbreviationsonly}{\jjz@packagefalse} 
+\DeclareOption{noabbreviations}{\jjz@abbreviationsfalse} 
 
 \ProcessOptions
 
 %%%%%%%%%%%%%%%%%
 % PACKAGES
+\ifjjz@package
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english]{babel}   
 
@@ -198,8 +203,29 @@
 
 %%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%
-% ABBREVIATIONS
+\crefname{chapter}{chapter}{chapters}
+\crefname{section}{section}{sections}
+\ifjjz@subseclabel
+	\crefname{subsection}{subsection}{Subsections}
+	\crefname{subsubsection}{subsubsection}{Subsubsections}
+\else 
+    \crefname{subsection}{section}{sections}
+    \crefname{subsubsection}{section}{sections}
+\fi
+\crefname{equation}{equation}{equations}
+\crefname{thm}{theorem}{theorems}
+\crefname{theorem}{theorem}{theorems}
+\crefname{lem}{lemma}{lemmas}
+\crefname{prop}{proposition}{propositions}
+\crefname{defn}{definition}{definitions}
+\crefname{conj}{conjecture}{conjectures} 
+\crefname{rmk}{remark}{remarks} 
+\crefname{ex}{exercise}{exercises} 
+\crefname{eg}{example}{examples} 
+
+\fi 
+
+\if\jjz@abbreviations
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\FF}{\mathbb{F}}
 \newcommand{\NN}{\mathbb{N}}
@@ -244,28 +270,7 @@
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
-%%%%%%%%%%%%%%%%%
-
-
-\crefname{chapter}{chapter}{chapters}
-\crefname{section}{section}{sections}
-\ifjjz@subseclabel
-	\crefname{subsection}{subsection}{Subsections}
-	\crefname{subsubsection}{subsubsection}{Subsubsections}
-\else 
-    \crefname{subsection}{section}{sections}
-    \crefname{subsubsection}{section}{sections}
-\fi
-\crefname{equation}{equation}{equations}
-\crefname{thm}{theorem}{theorems}
-\crefname{theorem}{theorem}{theorems}
-\crefname{lem}{lemma}{lemmas}
-\crefname{prop}{proposition}{propositions}
-\crefname{defn}{definition}{definitions}
-\crefname{conj}{conjecture}{conjectures} 
-\crefname{rmk}{remark}{remarks} 
-\crefname{ex}{exercise}{exercises} 
-\crefname{eg}{example}{examples} 
+\fi 
 
 \endinput
 
