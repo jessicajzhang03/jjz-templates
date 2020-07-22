@@ -1,0 +1,272 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{jjz}[2020/07/17 A package for personal use] 
+
+\newif\ifjjz@thmshare\jjz@thmsharetrue
+\newif\ifjjz@thmsec\jjz@thmsectrue
+\newif\ifjjz@subseclabel\jjz@subseclabelfalse
+\newif\ifjjz@titling\jjz@titlingtrue
+\newif\ifjjz@sans\jjz@sanstrue
+\newif\ifjjz@handout\jjz@handoutfalse
+\newif\ifjjz@solutions\jjz@solutionsfalse
+\newif\ifjjz@headfoot\jjz@headfootfalse 
+\newif\ifjjz@titlepage\jjz@titlepagefalse 
+
+\newif\ifjjz@ORthmshare\jjz@ORthmsharefalse
+\newif\ifjjz@ORthmsec\jjz@ORthmsecfalse 
+\newif\ifjjz@ORsubseclabel\jjz@ORsubseclabelfalse 
+\newif\ifjjz@ORtitling\jjz@ORtitlingfalse
+\newif\ifjjz@ORsans\jjz@ORsansfalse 
+\newif\ifjjz@ORheadfoot\jjz@ORheadfootfalse 
+\newif\ifjjz@ORtitlepage\jjz@ORtitlepagefalse 
+
+\DeclareOption{thmshare}{\jjz@thmsharetrue}
+\DeclareOption{nothmshare}{\jjz@thmsharefalse\jjz@ORthmsharetrue}
+\DeclareOption{thmsec}{\jjz@thmsectrue} 
+\DeclareOption{nothmsec}{\jjz@thmsecfalse\jjz@ORthmsectrue}
+\DeclareOption{subseclabel}{\jjz@subseclabeltrue}
+\DeclareOption{nosubseclabel}{\jjz@subseclabelfalse\jjz@OR\subseclabeltrue}
+\DeclareOption{titling}{\jjz@titlingtrue}
+\DeclareOption{notitling}{\jjz@titlingfalse\jjz@ORtitlingtrue}
+\DeclareOption{sans}{\jjz@sanstrue}
+\DeclareOption{nosans}{\jjz@sansfalse\jjz@ORsanstrue}
+\DeclareOption{handout}{\jjz@handouttrue}
+\DeclareOption{nohandout}{\jjz@handoutfalse}
+\DeclareOption{solutions}{\jjz@solutionstrue}
+\DeclareOption{solutions}{\jjz@solutionsfalse}
+\DeclareOption{headfoot}{\jjz@headfoottrue}
+\DeclareOption{noheadfoot}{\jjz@headfootfalse\jjz@ORheadfoottrue} 
+\DeclareOption{titlepage}{\jjz@titlepagetrue} 
+\DeclareOption{titlepage}{\jjz@titlepagefalse\jjz@ORtitlepagetrue} 
+\DeclareOption{margin}{\RequirePackage[margin=1in]{geometry}} 
+\DeclareOption{nomargin}{}
+
+\ProcessOptions
+
+%%%%%%%%%%%%%%%%%
+% PACKAGES
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[english]{babel}   
+
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage[colorinlistoftodos]{todonotes}
+\RequirePackage{amsfonts,amsmath,amsthm,amssymb,mathtools}
+\RequirePackage[shortlabels]{enumitem}
+\RequirePackage{graphicx}
+\RequirePackage{tikz} 
+\RequirePackage[inline]{asymptote} 
+\RequirePackage{hyperref} 
+\RequirePackage[nameinlink]{cleveref}
+\RequirePackage[font=small,margin=0.5in]{caption}
+%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%
+% SECTIONING
+
+\ifjjz@sans
+    \RequirePackage{titlesec}
+    \titleformat*{\section}{\Large\bfseries\sffamily}
+    \titleformat*{\subsection}{\large\bfseries\sffamily}
+    \titleformat*{\subsubsection}{\bfseries\sffamily}
+\fi
+
+\renewcommand{\contentsname}{Table of Contents}
+\newcommand{\secname}{}
+
+\ifjjz@handout 
+	\ifjjz@ORtitling
+	\else 
+		\jjz@titlingtrue 
+	\fi 
+	\renewcommand{\secname}{Section} 
+\fi 
+
+\ifjjz@solutions 
+	\ifjjz@ORtitling
+	\else 
+		\jjz@titlingtrue 
+	\fi 
+	\renewcommand{\secname}{Chapter} 
+	\newcommand\booktitle{} 
+	\newcommand\bookauthor{} 
+\fi 
+
+% TITLING
+\author{Jessica J.~Zhang}
+
+\ifjjz@titling
+	\RequirePackage{titling}
+    \pretitle{\vspace{-25pt}\begin{center} \bfseries \sffamily \LARGE}
+    \posttitle{\vspace{2pt} \end{center}}
+    \preauthor{\begin{center} \sffamily \large}
+    \postauthor{\vspace{-5pt} \end{center}}
+    \predate{\begin{center} \sffamily \large}
+    \postdate{\vspace{-7pt} \end{center}}
+    
+\else
+	\RequirePackage{titling}
+	\pretitle{\vspace{-25pt}\begin{center} \LARGE}
+    \posttitle{\vspace{2pt}\end{center}}
+    \preauthor{\begin{center} \large}
+    \postauthor{\vspace{-5pt} \end{center}}
+    \predate{\begin{center} \large}
+    \postdate{\vspace{-7pt} \end{center}}
+\fi
+
+% HEADER/FOOTER
+
+\ifjjz@headfoot
+	\RequirePackage{fancyhdr}
+    \pagestyle{fancy}
+    \renewcommand{\sectionmark}[1]{\markboth{\secname~\thesection. #1}{} }
+    \fancyhf{}
+    \rhead{\leftmark}
+    \lhead{\@author}
+    \rfoot{Page \thepage}
+    \renewcommand{\headrulewidth}{0.2pt}
+\fi 
+%%%%%%%%%%%%%%%%%
+
+% THM STUFF 
+\ifjjz@thmsec
+	\theoremstyle{plain}
+	\newtheorem{thm}{Theorem}[section]
+\else 
+	\theoremstyle{plain}
+	\newtheorem{thm}{Theorem}
+\fi 
+
+\ifjjz@thmshare
+    \theoremstyle{plain}
+    \newtheorem{lem}[thm]{Lemma}
+    \newtheorem{cor}[thm]{Corollary}
+    \newtheorem{prop}[thm]{Proposition}
+    \newtheorem{conj}[thm]{Conjecture}
+    
+    \theoremstyle{definition}
+    \newtheorem{eg}[thm]{Example}
+    \newtheorem{ex}[thm]{Exercise}
+    \newtheorem{prob}[thm]{Problem}
+    \newtheorem{defn}[thm]{Definition}
+    \newtheorem{claim}[thm]{Claim}
+    
+    \theoremstyle{remark}
+    \newtheorem{rmk}[thm]{Remark}
+\else 
+    \theoremstyle{plain}
+    \newtheorem{lem}{Lemma}
+    \newtheorem{cor}{Corollary}
+    \newtheorem{prop}{Proposition}
+    \newtheorem{conj}{Conjecture}
+    
+    \theoremstyle{definition}
+    \newtheorem{eg}{Example}
+    \newtheorem{ex}{Exercise}
+    \newtheorem{prob}{Problem}
+    \newtheorem{defn}{Definition}
+    \newtheorem{claim}{Claim}
+    
+    \theoremstyle{remark}
+    \newtheorem{rmk}[thm]{Remark}
+\fi 
+
+\theoremstyle{plain} 
+\newtheorem{theorem}[thm]{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem*{lem*}{Lemma}
+\newtheorem*{cor*}{Corollary}
+\newtheorem*{prop*}{Proposition} 
+\newtheorem*{conj*}{Conjecture} 
+
+\theoremstyle{definition}
+\newtheorem*{defn*}{Definition}
+\newtheorem*{eg*}{Example}
+\newtheorem*{ex*}{Exercise}
+\newtheorem*{prob*}{Problem}
+
+\theoremstyle{remark}
+\newtheorem*{rmk*}{Remark}
+\newtheorem*{notation}{Notation}
+\newtheorem*{convention}{Convention} 
+
+\newenvironment{solution}[1]{\begin{proof}[Solution]#1}{\end{proof}}
+
+%%% TODO: 
+%%% \begin{env}[style]{Case 5b}
+%%% TEXT
+%%% \end{env}
+%%% which prints out Case 5b in given theoremstyle
+
+%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%
+% ABBREVIATIONS
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\sig}{\sigma}
+\newcommand{\storage}{\phi}
+\renewcommand{\phi}{\varphi}
+%\renewcommand{\varphi}{\storage}
+%\let\storage\undefined
+\newcommand{\ep}{\varepsilon} 
+\newcommand{\badep}{\epsilon} 
+\newcommand{\ga}{\gamma}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\la}{\lambda} 
+
+\newcommand{\limn}{\lim_{n\to\infty}}
+\newcommand{\limx}{\lim_{x\to\infty}}
+\newcommand{\limh}{\lim_{h\to0}}
+\newcommand{\sumn}[2]{\sum_{n=#1}^{#2}}
+\newcommand{\sumi}[2]{\sum_{i=#1}^{#2}}
+\newcommand{\sumj}[2]{\sum_{j=#1}^{#2}}
+
+\renewcommand{\vec}{\mathbf}
+
+\newcommand{\cat}[1]{\sfmath{#1}}
+\newcommand{\Top}[1]{\cat{Top}}
+\newcommand{\Set}[1]{\cat{Set}}
+\newcommand{\Ring}[1]{\cat{Ring}}
+\newcommand{\Grp}[1]{\cat{Grp}}
+
+\newcommand{\equivclass}{{\sim}}
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker} 
+\DeclareMathOperator{\Gal}{Gal}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+%%%%%%%%%%%%%%%%%
+
+
+\crefname{chapter}{chapter}{chapters}
+\crefname{section}{section}{sections}
+\ifjjz@subseclabel
+	\crefname{subsection}{subsection}{Subsections}
+	\crefname{subsubsection}{subsubsection}{Subsubsections}
+\else 
+    \crefname{subsection}{section}{sections}
+    \crefname{subsubsection}{section}{sections}
+\fi
+\crefname{equation}{equation}{equations}
+\crefname{thm}{theorem}{theorems}
+\crefname{theorem}{theorem}{theorems}
+\crefname{lem}{lemma}{lemmas}
+\crefname{prop}{proposition}{propositions}
+\crefname{defn}{definition}{definitions}
+\crefname{conj}{conjecture}{conjectures} 
+\crefname{rmk}{remark}{remarks} 
+\crefname{ex}{exercise}{exercises} 
+\crefname{eg}{example}{examples} 
+
+\endinput
+
+
