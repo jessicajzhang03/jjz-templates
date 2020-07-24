@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamy}
+\ProvidesPackage{jjz_beamy}[2020/07/22 A beamer thing]
 
 \usetheme{Warsaw} 
 %\usecolortheme{lily} 
@@ -100,23 +100,11 @@
 %%%%% EXTRAS
 \definecolor{vocab}{HTML}{e63946}
 \definecolor{highlight}{HTML}{9FB798}
+\renewcommand\emph[1]{{\color{vocab} #1}}
 \newcommand\vocab[1]{{\color{vocab} #1}} 
 \newcommand\highlight[1]{{\color{highlight} #1}}
 \newcommand\vv{\vspace{2mm}}
 %%%%%%%%%%%%
-
-%%%% MATH COMMANDS
-\newcommand\RR{\mathbb R} 
-\newcommand\ZZ{\mathbb Z} 
-\newcommand\QQ{\mathbb Q} 
-\newcommand\CC{\mathbb C} 
-\newcommand\NN{\mathbb N} 
-
-\newcommand\ga{\gamma}
-\newcommand\Ga{\Gamma}
-
-\DeclareMathOperator\im{im} 
-\DeclareMathOperator\id{id} 
 %%%%%%%%%%%%%
 
 \endinput 

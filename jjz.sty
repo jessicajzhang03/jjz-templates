@@ -12,6 +12,7 @@
 \newif\ifjjz@titlepage\jjz@titlepagefalse 
 \newif\ifjjz@package\jjz@packagetrue
 \newif\ifjjz@abbreviations\jjz@abbreviationstrue
+\newif\ifjjz@margin\jjz@margintrue
 
 \newif\ifjjz@ORthmshare\jjz@ORthmsharefalse
 \newif\ifjjz@ORthmsec\jjz@ORthmsecfalse 
@@ -39,8 +40,8 @@
 \DeclareOption{noheadfoot}{\jjz@headfootfalse\jjz@ORheadfoottrue} 
 \DeclareOption{titlepage}{\jjz@titlepagetrue} 
 \DeclareOption{titlepage}{\jjz@titlepagefalse\jjz@ORtitlepagetrue} 
-\DeclareOption{margin}{\RequirePackage[margin=1in]{geometry}} 
-\DeclareOption{nomargin}{}
+\DeclareOption{margin}{\jjz@margintrue} 
+\DeclareOption{nomargin}{\jjz@marginfalse}
 \DeclareOption{abbreviationsonly}{\jjz@packagefalse} 
 \DeclareOption{noabbreviations}{\jjz@abbreviationsfalse} 
 
@@ -48,6 +49,10 @@
 
 %%%%%%%%%%%%%%%%%
 % PACKAGES
+\ifjjz@margin
+\RequirePackage[margin=1in]{geometry}
+\fi
+
 \ifjjz@package
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english]{babel}   
@@ -225,7 +230,7 @@
 
 \fi 
 
-\if\jjz@abbreviations
+\ifjjz@abbreviations
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\FF}{\mathbb{F}}
 \newcommand{\NN}{\mathbb{N}}
