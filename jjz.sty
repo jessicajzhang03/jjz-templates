@@ -50,18 +50,18 @@
 
 %%%%%%%%%%%%%%%%%
 % PACKAGES
+\ifjjz@package
 \ifjjz@margin
 \RequirePackage[margin=1in]{geometry}
 \fi
-
-\ifjjz@package
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english]{babel}   
 
 \RequirePackage[dvipsnames]{xcolor}
+\setlength{\marginparwidth}{2cm}
 \RequirePackage[colorinlistoftodos]{todonotes}
 \RequirePackage{amsfonts,amsmath,amsthm,amssymb,mathtools}
-\RequirePackage[shortlabels]{enumitem}
+\RequirePackage[shortlabels,inline]{enumitem}
 \RequirePackage{graphicx}
 \RequirePackage{tikz} 
 \RequirePackage[inline]{asymptote} 
@@ -109,7 +109,7 @@
     \pretitle{\vspace{-25pt}\begin{center} \bfseries \sffamily \LARGE}
     \posttitle{\vspace{2pt} \end{center}}
     \preauthor{\begin{center} \sffamily \large}
-    \postauthor{\vspace{-5pt} \end{center}}
+    \postauthor{\vspace{-3pt} \end{center}}
     \predate{\begin{center} \sffamily \large}
     \postdate{\vspace{-7pt} \end{center}}
     
@@ -118,7 +118,7 @@
 	\pretitle{\vspace{-25pt}\begin{center} \LARGE}
     \posttitle{\vspace{2pt}\end{center}}
     \preauthor{\begin{center} \large}
-    \postauthor{\vspace{-5pt} \end{center}}
+    \postauthor{\vspace{-3pt} \end{center}}
     \predate{\begin{center} \large}
     \postdate{\vspace{-7pt} \end{center}}
 \fi
@@ -240,10 +240,9 @@
 \newcommand{\ZZ}{\mathbb{Z}}
 
 \newcommand{\sig}{\sigma}
-\newcommand{\storage}{\phi}
-\renewcommand{\phi}{\varphi}
-%\renewcommand{\varphi}{\storage}
-%\let\storage\undefined
+\let\temp\phi
+\let\phi\varphi
+\let\varphi\temp
 \newcommand{\ep}{\varepsilon} 
 \newcommand{\badep}{\epsilon} 
 \newcommand{\ga}{\gamma}
